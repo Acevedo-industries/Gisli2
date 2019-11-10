@@ -15,12 +15,58 @@ using System.IO;
 using iText.Kernel.Geom;
 using iText.Kernel.Font;
 using iText.IO.Font.Constants;
+using iText.Kernel.Events;
+using iText.Kernel.Pdf.Canvas;
+using iText.IO.Image;
+using iText.Kernel.Colors;
+using iText.Layout.Borders;
 
 namespace Gisli2
 {
     public partial class formulario_compra_venta : Form
     {
+        protected internal class MyEventHandler : IEventHandler
+        {
+            public virtual void HandleEvent(Event @event)
+            {
+                PdfDocumentEvent docEvent = (PdfDocumentEvent)@event;
+                PdfDocument pdfDoc = docEvent.GetDocument();
+                PdfPage page = docEvent.GetPage();
+                int pageNumber = pdfDoc.GetPageNumber(page);
+                iText.Kernel.Geom.Rectangle pageSize = page.GetPageSize();
+                PdfCanvas pdfCanvas = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
+                
+           
+                    //Add header and footer
+                    pdfCanvas
+                        .BeginText()
+                        .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD), 14)
+                                .MoveText(pageSize.GetWidth() / 2 - 60, pageSize.GetTop() - 40)
+                                .ShowText("Encabezado")
+                        //.MoveText(60, -pageSize.GetTop() + 30)
+                        //.ShowText(pageNumber.ToString())
+                                .EndText();
 
+                    if(nombre_imagen!=""){
+                        iText.Layout.Element.Image img = new iText.Layout.Element.Image(ImageDataFactory.Create(nombre_imagen));
+                        img.Scale(0.50f, 0.50f);
+                        img.SetFixedPosition(0, pageSize.GetTop() - (img.GetImageHeight() / 2));
+                        iText.Kernel.Geom.Rectangle area = page.GetPageSize();
+                        new Canvas(pdfCanvas, pdfDoc, area)
+                                .Add(img);
+                    }
+               
+               
+            }
+            internal MyEventHandler(formulario_compra_venta _enclosing)
+            {
+                this._enclosing = _enclosing;
+            }
+
+            private readonly formulario_compra_venta _enclosing;
+        }
+
+        static string nombre_imagen = "";
 
         public formulario_compra_venta()
         {
@@ -48,6 +94,7 @@ namespace Gisli2
             PageSize ps = PageSize.LETTER;
             PdfWriter writer = new PdfWriter(dest);
             PdfDocument pdf = new PdfDocument(writer);
+            pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new formulario_compra_venta.MyEventHandler(this));
             Document document = new Document(pdf, ps);
             document.SetMargins(70.8f, 84.75f, 121.60f, 85.03f);
             
@@ -55,6 +102,56 @@ namespace Gisli2
             compra_venta(document);
 
             document.Close();
+        }
+        public virtual void Process(Table table, String line, PdfFont font, bool isHeader)
+        {
+            int columnNumber = 0;   
+                if (isHeader)
+                {
+                    Cell cell = new Cell().Add(new Paragraph(line));
+                    cell.SetPadding(5).SetBorder(null);
+                    table.AddHeaderCell(cell);
+                }
+                else
+                {
+                    columnNumber++;
+                    Cell cell = new Cell().Add(new Paragraph(line));
+                    cell.SetFont(font);
+                     cell.SetBorder(new SolidBorder(ColorConstants.BLACK, 0.5f));
+                    table.AddCell(cell);
+                }
+        }
+        private void addtable(Document document, DataGridView tabla)
+        {
+            Table table = new Table(tabla.ColumnCount);
+            table.SetWidth(UnitValue.CreatePercentValue(100));
+
+            for (int i = 0; i < tabla.ColumnCount; i++)
+            {
+                Process(table, tabla.Columns[i].HeaderText+"", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+            }
+
+            for (int i = 0; i < tabla.Rows.Count - 1; i++)
+            {
+                for (int j = 0; j < tabla.ColumnCount; j++)
+                {
+                    if (tabla.Columns[j].HeaderText + "" == "IMPORTE")
+                    {
+                        Process(table, "$" + tabla.Rows[i].Cells[j].Value + "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+                    }
+                    else if (tabla.Columns[j].HeaderText + "" ==  "VALOR UNITARIO")
+                    {
+                        Process(table, "$" + tabla.Rows[i].Cells[j].Value + "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+                    }
+                    else
+                    {
+                        Process(table, tabla.Rows[i].Cells[j].Value + "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+                    }
+                    
+                }
+            }
+            
+            document.Add(table);
         }
 
         private void Createparagrah(Document document,String text)
@@ -159,6 +256,25 @@ DIRIGIDO A : MUNICIPIO DE SAN JUAN LALANA
 
 
 ");
+            addtable(document,dataGridView1);
         }
+
+
+        
+
+        private void image_fondo(object sender, CancelEventArgs e)
+        {
+            nombre_imagen = openFileDialog1.FileName;
+            label1.Text = nombre_imagen;
+        }
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked){
+                openFileDialog1.ShowDialog();
+            }
+        }
+
+
+        
     }
 }
