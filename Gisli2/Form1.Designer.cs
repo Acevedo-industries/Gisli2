@@ -80,13 +80,13 @@
             // 
             // cerrar
             // 
-            this.cerrar.BackColor = System.Drawing.Color.Coral;
+            this.cerrar.BackColor = System.Drawing.Color.CornflowerBlue;
             this.cerrar.FlatAppearance.BorderSize = 0;
             this.cerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cerrar.Location = new System.Drawing.Point(1010, -3);
+            this.cerrar.Location = new System.Drawing.Point(1023, -1);
             this.cerrar.Name = "cerrar";
-            this.cerrar.Size = new System.Drawing.Size(51, 29);
+            this.cerrar.Size = new System.Drawing.Size(26, 29);
             this.cerrar.TabIndex = 3;
             this.cerrar.Text = "X";
             this.cerrar.UseVisualStyleBackColor = false;
@@ -99,9 +99,9 @@
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(953, -3);
+            this.button2.Location = new System.Drawing.Point(988, -3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(51, 29);
+            this.button2.Size = new System.Drawing.Size(29, 29);
             this.button2.TabIndex = 4;
             this.button2.Text = "-";
             this.button2.UseVisualStyleBackColor = false;

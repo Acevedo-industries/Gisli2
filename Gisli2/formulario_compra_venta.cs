@@ -84,8 +84,9 @@ namespace Gisli2
             FileInfo file = new FileInfo(DEST);
             file.Directory.Create();
             CreatePdf(DEST);
-            groupBox1.Visible = false;
+   
             //this.Close();
+            System.Diagnostics.Process.Start(saveFileDialog1.FileName);
         }
 
         private void CreatePdf(String dest)
@@ -274,6 +275,37 @@ DIRIGIDO A : MUNICIPIO DE SAN JUAN LALANA
             }
         }
 
+        private void cerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+
+        public int xClick = 0, yClick = 0;
+
+        //PASO 2: en el evento MouseMove del Form
+        private void formulario_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            { xClick = e.X; yClick = e.Y; }
+            else
+            { this.Left = this.Left + (e.X - xClick); this.Top = this.Top + (e.Y - yClick); }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
 
         
     }
