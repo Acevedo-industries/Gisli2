@@ -25,7 +25,7 @@
     <UpdateUrl>https://raw.githubusercontent.com/Acevedo-industries/Gisli2/master/actualizaciones/</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.19</MinimumRequiredVersion>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>37</ApplicationRevision>
+    <ApplicationRevision>38</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -67,6 +67,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>pluma.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto">
