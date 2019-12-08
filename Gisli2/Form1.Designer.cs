@@ -77,6 +77,7 @@
             this.label1.Size = new System.Drawing.Size(133, 31);
             this.label1.TabIndex = 2;
             this.label1.Text = "Contratos";
+            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             // 
             // cerrar
             // 
