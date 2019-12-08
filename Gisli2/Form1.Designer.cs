@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cerrar = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.AliceBlue;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(85, 141);
+            this.button1.Location = new System.Drawing.Point(283, 149);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(142, 198);
             this.button1.TabIndex = 0;
@@ -72,7 +73,7 @@
             this.label1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(472, 28);
+            this.label1.Location = new System.Drawing.Point(292, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(133, 31);
             this.label1.TabIndex = 2;
@@ -85,7 +86,7 @@
             this.cerrar.FlatAppearance.BorderSize = 0;
             this.cerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cerrar.Location = new System.Drawing.Point(1023, -1);
+            this.cerrar.Location = new System.Drawing.Point(694, -1);
             this.cerrar.Name = "cerrar";
             this.cerrar.Size = new System.Drawing.Size(26, 29);
             this.cerrar.TabIndex = 3;
@@ -100,7 +101,7 @@
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(988, -3);
+            this.button2.Location = new System.Drawing.Point(659, -3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(29, 29);
             this.button2.TabIndex = 4;
@@ -108,13 +109,24 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(676, 407);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "label2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1055, 443);
+            this.ClientSize = new System.Drawing.Size(723, 443);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.cerrar);
             this.Controls.Add(this.label1);
@@ -138,6 +150,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button cerrar;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label2;
     }
 }
 
