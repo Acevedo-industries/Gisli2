@@ -169,19 +169,24 @@ namespace Gisli2
                     table.AddCell(cell);
                 }
         }
+
         private void addtable(Document document, DataGridView tabla)
         {
-            Table table = new Table(tabla.ColumnCount);
+            addtable(document, tabla, tabla.ColumnCount);
+        }
+        private void addtable(Document document, DataGridView tabla, int num_columns)
+        {
+            Table table = new Table(num_columns);
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
-            for (int i = 0; i < tabla.ColumnCount; i++)
+            for (int i = 0; i < num_columns; i++)
             {
                 Process(table, tabla.Columns[i].HeaderText+"", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
             }
 
             for (int i = 0; i < tabla.Rows.Count - 1; i++)
             {
-                for (int j = 0; j < tabla.ColumnCount; j++)
+                for (int j = 0; j < num_columns; j++)
                 {
                     if (tabla.Columns[j].HeaderText + "" == "IMPORTE")
                     {
@@ -242,7 +247,7 @@ III.-  “LOS CONTRATANTES” DECLARAN
 PRIMERA: OBJETO 
 LAS PARTES, RECONOCEN QUE EL OBJETO DEL PRESENTE ES LA COMPRAVENTA DE: 
 "); 
-addtable(document, dataGridView1);
+addtable(document, dataGridView1,2);
 Createparagrah(document, @" SEGUNDA: MONTO  
  
 “EL COMPRADOR” EXHIBIRÁ A “EL VENDEDOR” LA CANTIDAD DE $"+ cantidad +@" ("+cantidad_conletra+@") DICHA CANTIDAD QUE INCLUYE YA SU RESPECTIVO IMPUESTO AL VALOR AGREGADO.  LA EXHIBICIÓN DEL PAGO DEBERÁ REALIZARSE A MAS TARDAR EL "+fechalimite+@". 
