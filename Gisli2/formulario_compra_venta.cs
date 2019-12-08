@@ -121,6 +121,9 @@ namespace Gisli2
 
         private void createfile(object sender, CancelEventArgs e)
         {
+
+            try
+            {
             string DEST = saveFileDialog1.FileName;
             FileInfo file = new FileInfo(DEST);
             file.Directory.Create();
@@ -128,12 +131,16 @@ namespace Gisli2
    
             //this.Close();
             System.Diagnostics.Process.Start(saveFileDialog1.FileName);
+            }
+            catch (Exception eX)
+            {
+                MessageBox.Show(eX.ToString(), "Ocurrio un error al guardar el Documento");
+            }
         }
 
         private void CreatePdf(String dest)
         {
-            try
-            {
+            
                 PageSize ps = PageSize.LETTER;
                 PdfWriter writer = new PdfWriter(dest);
                 PdfDocument pdf = new PdfDocument(writer);
@@ -143,13 +150,14 @@ namespace Gisli2
                 compra_venta(document);
 
                 document.Close();
-            }
-            catch (Exception e) 
-            {
-                MessageBox.Show(e.ToString(), "Ocurrio un error al guardar el Documento");
-            }
+            
         }
-        public virtual void Process(Table table, String line, PdfFont font, bool isHeader)
+
+        public virtual void Process(Table table, String line, PdfFont font, bool isHeader )
+        {
+            Process(table, line, font, isHeader, new SolidBorder(ColorConstants.BLACK, 0.5f));
+        }
+        public virtual void Process(Table table, String line, PdfFont font, bool isHeader, Border borde)
         {
             int columnNumber = 0;   
                 if (isHeader)
@@ -162,8 +170,8 @@ namespace Gisli2
                 {
                     columnNumber++;
                     Cell cell = new Cell().Add(new Paragraph(line));
-                    cell.SetFont(font);
-                     cell.SetBorder(new SolidBorder(ColorConstants.BLACK, 0.5f));
+                    cell.SetFont(font).SetFontSize(10);
+                     cell.SetBorder(borde);
                     table.AddCell(cell);
                 }
         }
@@ -205,19 +213,72 @@ namespace Gisli2
             document.Add(table);
         }
 
-        private void Createparagrah(Document document,String text)
+
+        private void addtable_puestos(Document document, DataGridView tabla)
+        {
+            addtable_puestos(document, tabla, tabla.Rows.Count-1);
+        }
+
+
+        private void addtable_puestos(Document document, DataGridView tabla, int num_filas)
+        {
+            Table table = new Table(num_filas);
+            table.SetWidth(UnitValue.CreatePercentValue(100));
+
+            for (int i = 0; i < tabla.Rows.Count - 1; i++)
+            {
+                string texto = "";
+                int n_caracteres =tabla.Rows[i].Cells[0].Value.ToString().Length+6;
+                for (int a = 0; a <= n_caracteres; a++ )
+                {
+                    texto = texto + "_";
+                }
+                texto = texto+"\nC. ";
+                for (int j = 0; j < tabla.ColumnCount; j++)
+                {
+                    texto = texto+ tabla.Rows[i].Cells[j].Value + "\n";
+                }
+                Process(table, texto.ToUpper() +" DEL "+ comprador_nombre, PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false, Border.NO_BORDER);
+            }
+
+            document.Add(table);
+        }
+
+        private void Createparagrah(Document document, String text)
+        {
+            Createparagrah(document, text, TextAlignment.JUSTIFIED);
+        }
+
+        private void Createparagrah(Document document, String text, TextAlignment estilo)
         {
             PdfFont fuente = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
             int tamanio_fuente = 10;
             
             Paragraph p = new Paragraph().SetFont(fuente).SetFontSize(tamanio_fuente).Add(text);
-            p.SetTextAlignment(TextAlignment.JUSTIFIED);
+            p.SetTextAlignment(estilo);
             document.Add(p);
         }
         
         private void compra_venta(Document document)
         {
-            Createparagrah(document, @"EN EL " + lugar_compraventa + @", SE CELEBRA EL PRESENTE CONTRATO DE COMPRAVENTA POR UNA PARTE EL" + comprador_nombre + @", REPRESENTADO POR LOS CC. MIGUEL PEREZ CORREA Y DELFINO BAUTISTA OJEDA EN SU CARÁCTER DE PRESIDENTE MUNICIPAL CONSTITUCIONAL Y SÍNDICO PROCURADOR RESPECTIVAMENTE, QUE EN ADELANTE SE DENOMINARA ´´EL COMPRADOR´´ Y LA EMPRESA ´´ " + vendedor_nombre + @",   REPRESENTADA POR LOS CC. ANGEL IVÁN CANELA FABIÁN Y VERÓNICA LETICIA MARTÍNEZ HERNÁNDEZ EN SU CALIDAD DE APODERADO LEGAL, QUE EN LO SUCESIVO SE LE DENOMINARA ´´EL VENDEDOR´´ MISMA PARTE QUE EN SU CONJUNTO SE LES LLAMARÁ ´´LOS CONTRATANTES´´, AL TENOR DE LAS SIGUIENTES DECLARACIONES Y CLAUSULAS: 
+           
+
+    string nombres ="";
+    string puestos="";
+    for(int b=0; b< dataGridView2.Rows.Count - 1;b++){
+        if(b== dataGridView2.Rows.Count - 3){
+             nombres = nombres + dataGridView2.Rows[b].Cells[0].Value+" y ";
+             puestos = puestos + dataGridView2.Rows[b].Cells[1].Value+" y ";
+        } else if(b== dataGridView2.Rows.Count - 2){
+             nombres = nombres + dataGridView2.Rows[b].Cells[0].Value;
+            puestos = puestos + dataGridView2.Rows[b].Cells[1].Value;
+        }else{
+            nombres = nombres + dataGridView2.Rows[b].Cells[0].Value+" , ";
+            puestos = puestos + dataGridView2.Rows[b].Cells[1].Value+" , ";
+        }
+       
+    }
+    Createparagrah(document, @"EN EL " + lugar_compraventa + @", SE CELEBRA EL PRESENTE CONTRATO DE COMPRAVENTA POR UNA PARTE EL" + comprador_nombre + @", REPRESENTADO POR LOS CC. "+nombres.ToUpper()+" EN SU CARÁCTER DE "+puestos.ToUpper()+@" RESPECTIVAMENTE, QUE EN ADELANTE SE DENOMINARA ´´EL COMPRADOR´´ Y LA EMPRESA ´´ " + vendedor_nombre + @",   REPRESENTADA POR LOS CC. "+vendedor_representantes+@" EN SU CALIDAD DE APODERADO LEGAL, QUE EN LO SUCESIVO SE LE DENOMINARA ´´EL VENDEDOR´´ MISMA PARTE QUE EN SU CONJUNTO SE LES LLAMARÁ ´´LOS CONTRATANTES´´, AL TENOR DE LAS SIGUIENTES DECLARACIONES Y CLAUSULAS: 
  
 DECLARACIONES 
  I.- ´´EL COMPRADOR´´ DECLARA 
@@ -259,24 +320,24 @@ LAS PARTES CONVIENEN EN QUE  “EL VENDEDOR” NO PODRÁ DIVULGAR POR MEDIO DE P
 QUINTA: RESICION 
 PARA EL CASO DE INCUMPLIMIENTO DE CUALQUIERA DE LAS CLÁUSULAS ANTES SEÑALADAS, LAS PARTES PODRÁN PROMOVER LA RECISIÓN DEL PRESENTE. PARA LA INTERPRETACIÓN Y CUMPLIMIENTO DEL PRESENTE CONTRATO, LAS PARTES SE SOMETEN A LA JURISDICCIÓN Y COMPETENCIA DE LOS TRIBUNALES DONDE SE SUSCRIBE EL PRESENTE CONTRATO, O EN SU DEFECTO EN LA CIUDAD DE OAXACA DE JUÁREZ, OAXACA. POR LO TANTO, RENUNCIAN AL FUERO QUE PUDIESE CORRESPONDERLE EN RAZÓN DE SU DOMICILIO PRESENTE O FUTURO O POR CUALQUIER OTRA CAUSA. 
  
-EL PRESENTE CONTRATO SE FIRMA EN EL "+lugar_compraventa+@", EL DIA "+fecha_compraventa+@". 
+EL PRESENTE CONTRATO SE FIRMA EN EL "+lugar_compraventa+@", EL DIA "+fecha_compraventa+"."); 
  
- 
-POR “EL MUNICIPIO” 
-            	 	        
- 
-____________________________        	____________________________       
- 
- 	C. MIGUEL PEREZ CORREA 	C. DELFINO BAUTISTA OJEDA 
- 	PRESIDENTE MUNICIPAL DEL 	SINDICO PROCURADOR DEL 
- 
-MUNICIPIO DE SAN JUAN LALANA, 	MUNICIPIO DE SAN JUAN LALANA,  	CHOAPAM, OAXACA. 	CHOAPAM, OAXACA. 
- 	 
- 	           POR “EL VENDEDOR” 
-____________________________       
-PAPELERIA COMERCIAL DEL ITSMO 
-S.A DE C.V 
- ");
+Createparagrah(document, @" 
+
+                          POR “EL MUNICIPIO” 
+
+
+                                                        ",TextAlignment.CENTER);
+
+addtable_puestos(document, dataGridView2);
+
+Createparagrah(document, @"
+
+POR “EL VENDEDOR” 
+
+                       _____________________________
+"+vendedor_nombre, TextAlignment.CENTER);
+
 
             document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
             Createparagrah(document, @"COTIZACIÓN                                                                                                                       
@@ -338,6 +399,16 @@ DIRIGIDO A : "+comprador_nombre+@"
         private void button4_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void textBox11_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         

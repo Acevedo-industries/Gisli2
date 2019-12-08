@@ -57,7 +57,6 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox10 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,6 +84,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.textBox10 = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -112,7 +112,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(378, 52);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Crear \r";
+            this.button1.Text = "Crear PDF\r\n";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -171,6 +171,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(953, 234);
             this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.formulario_MouseMove);
             // 
             // CANTIDAD
@@ -404,17 +405,6 @@
             this.label12.Size = new System.Drawing.Size(127, 20);
             this.label12.TabIndex = 20;
             this.label12.Text = "Representantes";
-            // 
-            // textBox10
-            // 
-            this.textBox10.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox10.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox10.Location = new System.Drawing.Point(14, 205);
-            this.textBox10.Multiline = true;
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(938, 95);
-            this.textBox10.TabIndex = 19;
             // 
             // groupBox3
             // 
@@ -657,6 +647,7 @@
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(104, 26);
             this.textBox11.TabIndex = 26;
+            this.textBox11.TextChanged += new System.EventHandler(this.textBox11_TextChanged);
             // 
             // tabControl1
             // 
@@ -714,6 +705,17 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Objetos";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // textBox10
+            // 
+            this.textBox10.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.textBox10.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox10.Location = new System.Drawing.Point(14, 205);
+            this.textBox10.Multiline = true;
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(938, 95);
+            this.textBox10.TabIndex = 19;
             // 
             // formulario_compra_venta
             // 
@@ -797,7 +799,6 @@
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox10;
         public System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Puesto;
@@ -819,5 +820,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DESCRIPCION;
         private System.Windows.Forms.DataGridViewTextBoxColumn VALOR_UNITARIO;
         private System.Windows.Forms.DataGridViewTextBoxColumn IMPORTE;
+        private System.Windows.Forms.TextBox textBox10;
     }
 }
