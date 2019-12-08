@@ -25,7 +25,7 @@
     <UpdateUrl>https://raw.githubusercontent.com/Acevedo-industries/Gisli2/master/actualizaciones/</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.19</MinimumRequiredVersion>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>38</ApplicationRevision>
+    <ApplicationRevision>39</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
