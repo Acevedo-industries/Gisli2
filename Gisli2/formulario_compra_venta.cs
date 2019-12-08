@@ -39,12 +39,12 @@ namespace Gisli2
                 int pageNumber = pdfDoc.GetPageNumber(page);
                 iText.Kernel.Geom.Rectangle pageSize = page.GetPageSize();
                 PdfCanvas pdfCanvas = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
-
+                double ancho_encabezado = vendedor_nombre.Length*3.5;
                     //Add header and footer
                     pdfCanvas
                         .BeginText()
                         .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD), 13)
-                                .MoveText(pageSize.GetWidth() / 2 - 60, pageSize.GetTop() - 40)
+                                .MoveText(pageSize.GetWidth() / 2 - ancho_encabezado, pageSize.GetTop() - 60)
                                 .ShowText(vendedor_nombre)
                         //.MoveText(60, -pageSize.GetTop() + 30)
                         //.ShowText(pageNumber.ToString())
@@ -132,7 +132,6 @@ namespace Gisli2
 
         private void CreatePdf(String dest)
         {
- 
             try
             {
                 PageSize ps = PageSize.LETTER;
@@ -149,7 +148,6 @@ namespace Gisli2
             {
                 MessageBox.Show(e.ToString(), "Ocurrio un error al guardar el Documento");
             }
-            
         }
         public virtual void Process(Table table, String line, PdfFont font, bool isHeader)
         {
@@ -213,6 +211,7 @@ namespace Gisli2
             int tamanio_fuente = 10;
             
             Paragraph p = new Paragraph().SetFont(fuente).SetFontSize(tamanio_fuente).Add(text);
+            p.SetTextAlignment(TextAlignment.JUSTIFIED);
             document.Add(p);
         }
         
@@ -223,14 +222,13 @@ namespace Gisli2
 DECLARACIONES 
  I.- ´´EL COMPRADOR´´ DECLARA 
  
-i.   QUE ES UNA ENTIDAD DE CARÁCTER PÚBLICO, CON PATRIMONIO PROPIO, AUTÓNOMO EN SU RÉGIMEN INTERIOR Y CON LIBRE ADMINISTRACIÓN DE SU HACIENDA, INVESTIDO DE PERSONALIDAD JURÍDICA PROPIA EN LOS TÉRMINOS 
-DE LAS FRACCIONES II Y IV DEL ARTICULO 115 DE LA CONSTITUCIÓN POLITICA DE LOS ESTADOS UNIDOS MEXICANOS, ARTICULO 113 DE LA CONSTITUCIÓN POLITICA DEL ESTADO LIBRE Y SOBERANO DE OAXACA Y ARTICULO 68 DE LA LEY ORGANICA MUNICIPAL DE ESTADO DE OAXACA. 
+i. QUE ES UNA ENTIDAD DE CARÁCTER PÚBLICO, CON PATRIMONIO PROPIO, AUTÓNOMO EN SU RÉGIMEN INTERIOR Y CON LIBRE ADMINISTRACIÓN DE SU HACIENDA, INVESTIDO DE PERSONALIDAD JURÍDICA PROPIA EN LOS TÉRMINOS DE LAS FRACCIONES II Y IV DEL ARTICULO 115 DE LA CONSTITUCIÓN POLITICA DE LOS ESTADOS UNIDOS MEXICANOS, ARTICULO 113 DE LA CONSTITUCIÓN POLITICA DEL ESTADO LIBRE Y SOBERANO DE OAXACA Y ARTICULO 68 DE LA LEY ORGANICA MUNICIPAL DE ESTADO DE OAXACA. 
 
 ii. QUE SEÑALA COMO SU DOMICILIO PARA LOS FINES Y EFECTOS DE ESTE CONTRATO EL HUBICADO EN: " + comprador_domicilio + @". 
 
-iii.	QUE LA AUTORIDAD, REPRESENTANTE DEL MUNICIPIO, ESTÁ FACULTADA PARA CONTRATAR EN LOS TERMINOS DEL ARTICULO 43 FRACCIÓN V, DE LA LEY ORGANICA MUNICIPAL DEL  ESTADO DE OAXACA. 
+iii. QUE LA AUTORIDAD, REPRESENTANTE DEL MUNICIPIO, ESTÁ FACULTADA PARA CONTRATAR EN LOS TERMINOS DEL ARTICULO 43 FRACCIÓN V, DE LA LEY ORGANICA MUNICIPAL DEL  ESTADO DE OAXACA. 
 
-iv.	QUE PARA CUBRIR LAS EROGACIONES QUE SE DERIVEN DEL PRESENTE CONTRATO “EL MUNICIPIO” CUENTA CON LOS RECURSOS PRESUPUESTALES ASIGNADOS Y DISPONIBLES DEL EJERCICIO " + comprador_ejercicio + @", EL PAGO DE LA COMPRA, DEL OBJETO DE ESTE CONTRATO. 
+iv. QUE PARA CUBRIR LAS EROGACIONES QUE SE DERIVEN DEL PRESENTE CONTRATO “EL MUNICIPIO” CUENTA CON LOS RECURSOS PRESUPUESTALES ASIGNADOS Y DISPONIBLES DEL EJERCICIO " + comprador_ejercicio + @", EL PAGO DE LA COMPRA, DEL OBJETO DE ESTE CONTRATO. 
  
 II.- “EL VENDEDOR” DECLARA 
  
@@ -251,10 +249,7 @@ addtable(document, dataGridView1,2);
 Createparagrah(document, @" SEGUNDA: MONTO  
  
 “EL COMPRADOR” EXHIBIRÁ A “EL VENDEDOR” LA CANTIDAD DE $"+ cantidad +@" ("+cantidad_conletra+@") DICHA CANTIDAD QUE INCLUYE YA SU RESPECTIVO IMPUESTO AL VALOR AGREGADO.  LA EXHIBICIÓN DEL PAGO DEBERÁ REALIZARSE A MAS TARDAR EL "+fechalimite+@". 
- 
- 
- 
- 
+  
 TERCERA: ENTREGA DE LAS MERCANCIAS  
 “EL VENDEDOR” SE COMPROMETE A ENTREGAR LAPS MERCANCIAS OBJETO DEL PRESENTE CONTRATO A MAS TARDAR EL DIA "+fechalimite+@". 
  
