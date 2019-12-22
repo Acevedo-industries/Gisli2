@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>E:\Gisli2\actualizaciones\</PublishUrl>
+    <PublishUrl>C:\Users\ito\Desktop\gisli\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,7 +25,7 @@
     <UpdateUrl>https://raw.githubusercontent.com/Acevedo-industries/Gisli2/master/actualizaciones/</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.19</MinimumRequiredVersion>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>41</ApplicationRevision>
+    <ApplicationRevision>42</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -138,6 +138,12 @@
     <Compile Include="formulario_compra_venta.Designer.cs">
       <DependentUpon>formulario_compra_venta.cs</DependentUpon>
     </Compile>
+    <Compile Include="formulario_servicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formulario_servicios.Designer.cs">
+      <DependentUpon>formulario_servicios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="estado_archivo.resx">
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formulario_compra_venta.resx">
       <DependentUpon>formulario_compra_venta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formulario_servicios.resx">
+      <DependentUpon>formulario_servicios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

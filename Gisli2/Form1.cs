@@ -44,5 +44,11 @@ namespace Gisli2
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            formulario_servicios ventana2 = new formulario_servicios();
+            ventana2.Show();
+        }
     }
 }

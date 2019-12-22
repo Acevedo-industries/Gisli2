@@ -23,14 +23,12 @@ using iText.Layout.Borders;
 
 namespace Gisli2
 {
-
-    public partial class formulario_compra_venta : Form
+    public partial class formulario_servicios : Form
     {
 
-         
         protected internal class MyEventHandler : IEventHandler
         {
-            
+
             public virtual void HandleEvent(Event @event)
             {
                 PdfDocumentEvent docEvent = (PdfDocumentEvent)@event;
@@ -39,36 +37,36 @@ namespace Gisli2
                 int pageNumber = pdfDoc.GetPageNumber(page);
                 iText.Kernel.Geom.Rectangle pageSize = page.GetPageSize();
                 PdfCanvas pdfCanvas = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
-                double ancho_encabezado = vendedor_nombre.Length*3.5;
-                    //Add header and footer
-                    pdfCanvas
-                        .BeginText()
-                        .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD), 13)
-                                .MoveText(pageSize.GetWidth() / 2 - ancho_encabezado, pageSize.GetTop() - 60)
-                                .ShowText(vendedor_nombre)
-                        //.MoveText(60, -pageSize.GetTop() + 30)
-                        //.ShowText(pageNumber.ToString())
-                                .EndText();
+                double ancho_encabezado = vendedor_nombre.Length * 3.5;
+                //Add header and footer
+                pdfCanvas
+                    .BeginText()
+                    .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD), 13)
+                            .MoveText(pageSize.GetWidth() / 2 - ancho_encabezado, pageSize.GetTop() - 60)
+                            //.ShowText(vendedor_nombre)
+                    //.MoveText(60, -pageSize.GetTop() + 30)
+                    //.ShowText(pageNumber.ToString())
+                            .EndText();
 
-                    if(nombre_imagen!=""){
-                        iText.Layout.Element.Image img = new iText.Layout.Element.Image(ImageDataFactory.Create(nombre_imagen));
-                        img.Scale(0.50f, 0.50f);
-                        img.SetFixedPosition(0, pageSize.GetTop() - (img.GetImageHeight() / 2));
-                        iText.Kernel.Geom.Rectangle area = page.GetPageSize();
-                        new Canvas(pdfCanvas, pdfDoc, area)
-                                .Add(img);
-                    }
-               
-               
+                if (nombre_imagen != "")
+                {
+                    iText.Layout.Element.Image img = new iText.Layout.Element.Image(ImageDataFactory.Create(nombre_imagen));
+                    img.Scale(0.50f, 0.50f);
+                    img.SetFixedPosition(0, pageSize.GetTop() - (img.GetImageHeight() / 2));
+                    iText.Kernel.Geom.Rectangle area = page.GetPageSize();
+                    new Canvas(pdfCanvas, pdfDoc, area)
+                            .Add(img);
+                }
+
+
             }
-            internal MyEventHandler(formulario_compra_venta _enclosing)
+            internal MyEventHandler(formulario_servicios _enclosing)
             {
                 this._enclosing = _enclosing;
             }
 
-            private readonly formulario_compra_venta _enclosing;
+            private readonly formulario_servicios _enclosing;
         }
-
         static string nombre_imagen = "";
         static string vendedor_nombre = "";
         static string vendedor_tipo = "";
@@ -93,8 +91,7 @@ namespace Gisli2
         static string iva = "";
 
         static string fecha_actual = DateTime.Today.ToString("dd/MM/yyyy");
-
-        public formulario_compra_venta()
+        public formulario_servicios()
         {
             InitializeComponent();
         }
@@ -104,7 +101,7 @@ namespace Gisli2
             vendedor_nombre = textBox1.Text;
             vendedor_tipo = textBox3.Text;
             vendedor_domicilio = textBox5.Text;
-            vendedor_rfc = textBox3.Text; 
+            vendedor_rfc = textBox3.Text;
             vendedor_representantes = textBox10.Text;
 
             comprador_nombre = textBox7.Text;
@@ -113,7 +110,7 @@ namespace Gisli2
 
             declaran = textBox9.Text;
 
-            
+
             cantidad_conletra = textBox20.Text;
             fechalimite = textBox21.Text;
 
@@ -123,9 +120,14 @@ namespace Gisli2
             subtotal = textBox22.Text;
             iva = textBox13.Text;
             cantidad = textBox14.Text;
-
+            
 
             saveFileDialog1.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void createfile(object sender, CancelEventArgs e)
@@ -138,14 +140,14 @@ namespace Gisli2
 
                 PdfWriter writer = new PdfWriter(DEST);
                 PdfDocument pdf = new PdfDocument(writer);
-                pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new formulario_compra_venta.MyEventHandler(this));
+                pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new formulario_servicios.MyEventHandler(this));
 
                 Document document = new Document(pdf, PageSize.LETTER);
                 try
                 {
 
                     document.SetMargins(70.8f, 84.75f, 121.60f, 85.03f);
-                    compra_venta(document);
+                    servicios(document);
 
                     document.Close();
 
@@ -165,36 +167,35 @@ namespace Gisli2
             {
 
             }
-          
         }
 
-        public virtual void Process(Table table, String line, PdfFont font, bool isHeader )
+        public virtual void Process(Table table, String line, PdfFont font, bool isHeader)
         {
             Process(table, line, font, isHeader, new SolidBorder(ColorConstants.BLACK, 0.5f));
         }
         public virtual void Process(Table table, String line, PdfFont font, bool isHeader, Border borde)
         {
-            int columnNumber = 0;   
-                if (isHeader)
-                {
-                    Cell cell = new Cell().Add(new Paragraph(line));
-                    cell.SetPadding(5).SetBorder(null);
-                    table.AddHeaderCell(cell);
-                }
-                else
-                {
-                    columnNumber++;
-                    Cell cell = new Cell().Add(new Paragraph(line));
-                    cell.SetFont(font).SetFontSize(10);
-                     cell.SetBorder(borde);
-                    table.AddCell(cell);
-                }
+            int columnNumber = 0;
+            if (isHeader)
+            {
+                Cell cell = new Cell().Add(new Paragraph(line));
+                cell.SetPadding(5).SetBorder(null);
+                table.AddHeaderCell(cell);
+            }
+            else
+            {
+                columnNumber++;
+                Cell cell = new Cell().Add(new Paragraph(line));
+                cell.SetFont(font).SetFontSize(10);
+                cell.SetBorder(borde);
+                table.AddCell(cell);
+            }
         }
 
         private void addtable(Document document, DataGridView tabla)
         {
             addtable(document, tabla, tabla.ColumnCount);
-            
+
         }
         private void addtable(Document document, DataGridView tabla, int num_columns)
         {
@@ -203,7 +204,7 @@ namespace Gisli2
 
             for (int i = 0; i < num_columns; i++)
             {
-                Process(table, tabla.Columns[i].HeaderText+"", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+                Process(table, tabla.Columns[i].HeaderText + "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
             }
 
             for (int i = 0; i < tabla.Rows.Count - 1; i++)
@@ -214,7 +215,7 @@ namespace Gisli2
                     {
                         Process(table, "$" + tabla.Rows[i].Cells[j].Value + "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
                     }
-                    else if (tabla.Columns[j].HeaderText + "" ==  "VALOR UNITARIO")
+                    else if (tabla.Columns[j].HeaderText + "" == "VALOR UNITARIO")
                     {
                         Process(table, "$" + tabla.Rows[i].Cells[j].Value + "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
                     }
@@ -222,12 +223,13 @@ namespace Gisli2
                     {
                         Process(table, tabla.Rows[i].Cells[j].Value + "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
                     }
-                    
+
                 }
             }
-            
-            
-            if(num_columns == 4){
+
+
+            if (num_columns == 4)
+            {
                 add_iva_subtotal(document, table);
             }
             else
@@ -236,12 +238,12 @@ namespace Gisli2
             }
         }
 
-        private void add_iva_subtotal(Document document,iText.Layout.Element.Table table)
+        private void add_iva_subtotal(Document document, iText.Layout.Element.Table table)
         {
-            Process(table,"", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+            Process(table, "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
             Process(table, "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
             Process(table, "SUBTOTAL", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
-            Process(table, "$"+subtotal, PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+            Process(table, "$" + subtotal, PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
 
             Process(table, "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
             Process(table, "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
@@ -259,11 +261,11 @@ namespace Gisli2
 
         private void addtable_puestos(Document document, DataGridView tabla)
         {
-            if (tabla.Rows.Count>1)
+            if (tabla.Rows.Count > 1)
             {
                 addtable_puestos(document, tabla, tabla.Rows.Count - 1);
             }
-            
+
         }
 
 
@@ -275,17 +277,17 @@ namespace Gisli2
             for (int i = 0; i < tabla.Rows.Count - 1; i++)
             {
                 string texto = "";
-                int n_caracteres =tabla.Rows[i].Cells[0].Value.ToString().Length+6;
-                for (int a = 0; a <= n_caracteres; a++ )
+                int n_caracteres = tabla.Rows[i].Cells[0].Value.ToString().Length + 6;
+                for (int a = 0; a <= n_caracteres; a++)
                 {
                     texto = texto + "_";
                 }
-                texto = texto+"\nC. ";
+                texto = texto + "\nC. ";
                 for (int j = 0; j < tabla.ColumnCount; j++)
                 {
-                    texto = texto+ tabla.Rows[i].Cells[j].Value + "\n";
+                    texto = texto + tabla.Rows[i].Cells[j].Value + "\n";
                 }
-                Process(table, texto.ToUpper() +" DEL "+ comprador_nombre, PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false, Border.NO_BORDER);
+                Process(table, texto.ToUpper() + " DEL " + comprador_nombre, PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false, Border.NO_BORDER);
             }
 
             document.Add(table);
@@ -300,32 +302,38 @@ namespace Gisli2
         {
             PdfFont fuente = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
             int tamanio_fuente = 10;
-            
+
             Paragraph p = new Paragraph().SetFont(fuente).SetFontSize(tamanio_fuente).Add(text);
             p.SetTextAlignment(estilo);
             document.Add(p);
         }
-        
-        private void compra_venta(Document document)
-        {
-           
 
-    string nombres ="";
-    string puestos="";
-    for(int b=0; b< dataGridView2.Rows.Count - 1;b++){
-        if(b== dataGridView2.Rows.Count - 3){
-             nombres = nombres + dataGridView2.Rows[b].Cells[0].Value+" y ";
-             puestos = puestos + dataGridView2.Rows[b].Cells[1].Value+" y ";
-        } else if(b== dataGridView2.Rows.Count - 2){
-             nombres = nombres + dataGridView2.Rows[b].Cells[0].Value;
-            puestos = puestos + dataGridView2.Rows[b].Cells[1].Value;
-        }else{
-            nombres = nombres + dataGridView2.Rows[b].Cells[0].Value+" , ";
-            puestos = puestos + dataGridView2.Rows[b].Cells[1].Value+" , ";
-        }
-       
-    }
-    Createparagrah(document, @"EN EL " + lugar_compraventa + @", SE CELEBRA EL PRESENTE CONTRATO DE COMPRAVENTA POR UNA PARTE EL" + comprador_nombre + @", REPRESENTADO POR LOS CC. "+nombres.ToUpper()+" EN SU CARÁCTER DE "+puestos.ToUpper()+@" RESPECTIVAMENTE, QUE EN ADELANTE SE DENOMINARA ´´EL COMPRADOR´´ Y LA EMPRESA ´´ " + vendedor_nombre + @",   REPRESENTADA POR LOS CC. "+vendedor_representantes+@" EN SU CALIDAD DE APODERADO LEGAL, QUE EN LO SUCESIVO SE LE DENOMINARA ´´EL VENDEDOR´´ MISMA PARTE QUE EN SU CONJUNTO SE LES LLAMARÁ ´´LOS CONTRATANTES´´, AL TENOR DE LAS SIGUIENTES DECLARACIONES Y CLAUSULAS: 
+        private void servicios(Document document)
+        {
+
+
+            string nombres = "";
+            string puestos = "";
+            for (int b = 0; b < dataGridView2.Rows.Count - 1; b++)
+            {
+                if (b == dataGridView2.Rows.Count - 3)
+                {
+                    nombres = nombres + dataGridView2.Rows[b].Cells[0].Value + " y ";
+                    puestos = puestos + dataGridView2.Rows[b].Cells[1].Value + " y ";
+                }
+                else if (b == dataGridView2.Rows.Count - 2)
+                {
+                    nombres = nombres + dataGridView2.Rows[b].Cells[0].Value;
+                    puestos = puestos + dataGridView2.Rows[b].Cells[1].Value;
+                }
+                else
+                {
+                    nombres = nombres + dataGridView2.Rows[b].Cells[0].Value + " , ";
+                    puestos = puestos + dataGridView2.Rows[b].Cells[1].Value + " , ";
+                }
+
+            }
+            Createparagrah(document, @"QUE CELEBRAN POR UNA PARTE EL" + comprador_nombre + @", REPRESENTADA EN ESTE ACTO POR SU REPRESENTANTE LEGAL EL C. " + nombres.ToUpper() + " EN SU CARÁCTER DE " + puestos.ToUpper() + @" RESPECTIVAMENTE, QUE EN ADELANTE SE DENOMINARA ´´EL COMPRADOR´´ Y LA EMPRESA ´´ " + vendedor_nombre + @",   REPRESENTADA POR LOS CC. " + vendedor_representantes + @" EN SU CALIDAD DE APODERADO LEGAL, QUE EN LO SUCESIVO SE LE DENOMINARA ´´EL VENDEDOR´´ MISMA PARTE QUE EN SU CONJUNTO SE LES LLAMARÁ ´´LOS CONTRATANTES´´, AL TENOR DE LAS SIGUIENTES DECLARACIONES Y CLAUSULAS: 
  
 DECLARACIONES 
  I.- ´´EL COMPRADOR´´ DECLARA 
@@ -348,20 +356,20 @@ v. QUE SE ENCUENTRA AL CORRIENTE EN EL PAGO DE SUS OBLIGACIONES FISCALES.
  
 III.-  “LOS CONTRATANTES” DECLARAN  
  " + declaran +
-@" 
+        @" 
 
 CLÁUSULAS 
  
 PRIMERA: OBJETO 
 LAS PARTES, RECONOCEN QUE EL OBJETO DEL PRESENTE ES LA COMPRAVENTA DE: 
-"); 
-addtable(document, dataGridView1,2);
-Createparagrah(document, @" SEGUNDA: MONTO  
+");
+            addtable(document, dataGridView1, 2);
+            Createparagrah(document, @" SEGUNDA: MONTO  
  
-“EL COMPRADOR” EXHIBIRÁ A “EL VENDEDOR” LA CANTIDAD DE $"+ cantidad +@" ("+cantidad_conletra+@") DICHA CANTIDAD QUE INCLUYE YA SU RESPECTIVO IMPUESTO AL VALOR AGREGADO.  LA EXHIBICIÓN DEL PAGO DEBERÁ REALIZARSE A MAS TARDAR EL "+fechalimite+@". 
+“EL COMPRADOR” EXHIBIRÁ A “EL VENDEDOR” LA CANTIDAD DE $" + cantidad + @" (" + cantidad_conletra + @") DICHA CANTIDAD QUE INCLUYE YA SU RESPECTIVO IMPUESTO AL VALOR AGREGADO.  LA EXHIBICIÓN DEL PAGO DEBERÁ REALIZARSE A MAS TARDAR EL " + fechalimite + @". 
   
 TERCERA: ENTREGA DE LAS MERCANCIAS  
-“EL VENDEDOR” SE COMPROMETE A ENTREGAR LAPS MERCANCIAS OBJETO DEL PRESENTE CONTRATO A MAS TARDAR EL DIA "+fechalimite+@". 
+“EL VENDEDOR” SE COMPROMETE A ENTREGAR LAPS MERCANCIAS OBJETO DEL PRESENTE CONTRATO A MAS TARDAR EL DIA " + fechalimite + @". 
  
 CUARTA: CONFIDENCIALIDAD 
 LAS PARTES CONVIENEN EN QUE  “EL VENDEDOR” NO PODRÁ DIVULGAR POR MEDIO DE PUBLICACIONES, CONFERENCIAS, INFORMES O CUALQUIER OTRA FORMA, LOS RESULTADOS OBTENIDOS EN LOS TRABAJOS OBJETO DE ESTE CONTRATO, SIN LA AUTORIZACIÓN EXPRESA Y POR ESCRITO DE “EL COMPRADOR”,  PUES DICHOS DATOS Y RESULTADOS SON PROPIEDAD DE “EL COMPRADOR”, LA QUE DEBERÁ MANEJAR “EL VENDEDOR”, BAJO EL PRINCIPIO DE CONFIDENCIALIDAD Y RESERVA, POR LO QUE ESTA RESTRICCIÓN SE EXTIENDE A AQUELLAS PERSONAS QUE POR ALGUNA RAZÓN LLEGARAN A TENER CONOCIMIENTO DE LA MISMA, YA SEAN SUS SOCIOS, ASESORES, DEPENDIENTES O CUALQUIER OTRA PERSONA FÍSICA O MORAL QUE GUARDEN RELACIÓN CON “EL VENDEDOR”, AUN Y CUANDO LOS FINES DE LA EXPOSICIÓN, YA SEA CÁTEDRA, CONFERENCIA O CUALQUIER OTRO MEDIO, SEAN O NO REMUNERADOS. 
@@ -369,40 +377,40 @@ LAS PARTES CONVIENEN EN QUE  “EL VENDEDOR” NO PODRÁ DIVULGAR POR MEDIO DE P
 QUINTA: RESICION 
 PARA EL CASO DE INCUMPLIMIENTO DE CUALQUIERA DE LAS CLÁUSULAS ANTES SEÑALADAS, LAS PARTES PODRÁN PROMOVER LA RECISIÓN DEL PRESENTE. PARA LA INTERPRETACIÓN Y CUMPLIMIENTO DEL PRESENTE CONTRATO, LAS PARTES SE SOMETEN A LA JURISDICCIÓN Y COMPETENCIA DE LOS TRIBUNALES DONDE SE SUSCRIBE EL PRESENTE CONTRATO, O EN SU DEFECTO EN LA CIUDAD DE OAXACA DE JUÁREZ, OAXACA. POR LO TANTO, RENUNCIAN AL FUERO QUE PUDIESE CORRESPONDERLE EN RAZÓN DE SU DOMICILIO PRESENTE O FUTURO O POR CUALQUIER OTRA CAUSA. 
  
-EL PRESENTE CONTRATO SE FIRMA EN EL "+lugar_compraventa+@", EL DIA "+fecha_compraventa+"."); 
- 
-Createparagrah(document, @" 
+EL PRESENTE CONTRATO SE FIRMA EN EL " + lugar_compraventa + @", EL DIA " + fecha_compraventa + ".");
+
+            Createparagrah(document, @" 
 
                           POR “EL MUNICIPIO” 
 
 
-                                                        ",TextAlignment.CENTER);
+                                                        ", TextAlignment.CENTER);
 
-addtable_puestos(document, dataGridView2);
+            addtable_puestos(document, dataGridView2);
 
-Createparagrah(document, @"
+            Createparagrah(document, @"
 
 POR “EL VENDEDOR” 
 
                        _____________________________
-"+vendedor_nombre, TextAlignment.CENTER);
+" + vendedor_nombre, TextAlignment.CENTER);
 
 
-document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
+            document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
 
-Createparagrah(document, @"COTIZACIÓN                                                                                                                       
-"+fecha_actual+@"
-DIRIGIDO A : "+comprador_nombre+@" 	 
+            Createparagrah(document, @"COTIZACIÓN                                                                                                                       
+" + fecha_actual + @"
+DIRIGIDO A : " + comprador_nombre + @" 	 
 
 
 ");
-addtable(document,dataGridView1);
+            addtable(document, dataGridView1);
 
-Createparagrah(document, @"
+            Createparagrah(document, @"
 EN ESPERA DE SU RESPUESTA
 ");
 
-Createparagrah(document, @"
+            Createparagrah(document, @"
 
 ATENTAMENTE
 
@@ -411,7 +419,7 @@ ENCARGADO DE LA EMPRESA
         }
 
 
-        
+
 
         private void image_fondo(object sender, CancelEventArgs e)
         {
@@ -420,7 +428,8 @@ ENCARGADO DE LA EMPRESA
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked){
+            if (checkBox1.Checked)
+            {
                 openFileDialog1.ShowDialog();
             }
         }
@@ -447,11 +456,6 @@ ENCARGADO DE LA EMPRESA
             { this.Left = this.Left + (e.X - xClick); this.Top = this.Top + (e.Y - yClick); }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -461,22 +465,5 @@ ENCARGADO DE LA EMPRESA
         {
             this.WindowState = FormWindowState.Maximized;
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void textBox11_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        
     }
 }

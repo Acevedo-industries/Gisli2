@@ -40,3 +40,4 @@ E:\Gisli2\Gisli2\obj\Debug\Gisli2.application
 E:\Gisli2\Gisli2\obj\Debug\Gisli2.exe
 E:\Gisli2\Gisli2\obj\Debug\Gisli2.pdb
 E:\Gisli2\Gisli2\obj\Debug\Gisli2.csprojResolveAssemblyReference.cache
+E:\Gisli2\Gisli2\obj\Debug\Gisli2.formulario_servicios.resources
