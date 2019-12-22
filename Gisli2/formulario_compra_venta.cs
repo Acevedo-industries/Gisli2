@@ -252,7 +252,6 @@ namespace Gisli2
 
         private void addtable_puestos(Document document, DataGridView tabla)
         {
-            Console.Write(tabla.Rows.Count);
             if (tabla.Rows.Count>1)
             {
                 addtable_puestos(document, tabla, tabla.Rows.Count - 1);
