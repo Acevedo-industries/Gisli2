@@ -89,6 +89,11 @@ namespace Gisli2
         static string lugar_compraventa = "";
         static string fecha_compraventa = "";
 
+        static string subtotal = "";
+        static string iva = "";
+
+        static string fecha_actual = DateTime.Today.ToString("dd/MM/yyyy");
+
         public formulario_compra_venta()
         {
             InitializeComponent();
@@ -108,12 +113,16 @@ namespace Gisli2
 
             declaran = textBox9.Text;
 
-            cantidad = textBox11.Text;
-            cantidad_conletra = textBox13.Text;
-            fechalimite = textBox14.Text;
+            
+            cantidad_conletra = textBox20.Text;
+            fechalimite = textBox21.Text;
 
             lugar_compraventa = textBox12.Text;
             fecha_compraventa = textBox6.Text;
+
+            subtotal = textBox22.Text;
+            iva = textBox13.Text;
+            cantidad = textBox14.Text;
 
 
             saveFileDialog1.ShowDialog();
@@ -121,36 +130,35 @@ namespace Gisli2
 
         private void createfile(object sender, CancelEventArgs e)
         {
-
-            try
-            {
             string DEST = saveFileDialog1.FileName;
+
             FileInfo file = new FileInfo(DEST);
             file.Directory.Create();
-            CreatePdf(DEST);
-   
-            //this.Close();
+            PdfWriter writer = new PdfWriter(DEST);
+            PdfDocument pdf = new PdfDocument(writer);
+            pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new formulario_compra_venta.MyEventHandler(this));
+
+            Document document = new Document(pdf, PageSize.LETTER);
+            try
+            {            
+            
+            document.SetMargins(70.8f, 84.75f, 121.60f, 85.03f);
+            compra_venta(document);
+
+            document.Close();
+
             System.Diagnostics.Process.Start(saveFileDialog1.FileName);
             }
             catch (Exception eX)
             {
-                MessageBox.Show(eX.ToString(), "Ocurrio un error al guardar el Documento");
-            }
-        }
-
-        private void CreatePdf(String dest)
-        {
-            
-                PageSize ps = PageSize.LETTER;
-                PdfWriter writer = new PdfWriter(dest);
-                PdfDocument pdf = new PdfDocument(writer);
-                pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new formulario_compra_venta.MyEventHandler(this));
-                Document document = new Document(pdf, ps);
-                document.SetMargins(70.8f, 84.75f, 121.60f, 85.03f);
-                compra_venta(document);
-
                 document.Close();
-            
+                MessageBox.Show(eX.ToString(), "Ocurrio un error al guardar el Documento");
+                if (File.Exists(DEST))
+                {
+                    File.Delete(DEST);
+                }
+            }
+          
         }
 
         public virtual void Process(Table table, String line, PdfFont font, bool isHeader )
@@ -179,6 +187,7 @@ namespace Gisli2
         private void addtable(Document document, DataGridView tabla)
         {
             addtable(document, tabla, tabla.ColumnCount);
+            
         }
         private void addtable(Document document, DataGridView tabla, int num_columns)
         {
@@ -210,13 +219,45 @@ namespace Gisli2
                 }
             }
             
+            
+            if(num_columns == 4){
+                add_iva_subtotal(document, table);
+            }
+            else
+            {
+                document.Add(table);
+            }
+        }
+
+        private void add_iva_subtotal(Document document,iText.Layout.Element.Table table)
+        {
+            Process(table,"", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+            Process(table, "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+            Process(table, "SUBTOTAL", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+            Process(table, "$"+subtotal, PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+
+            Process(table, "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+            Process(table, "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+            Process(table, "IVA", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+            Process(table, "$" + iva, PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+
+            Process(table, "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+            Process(table, "", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+            Process(table, "TOTAL", PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+            Process(table, "$" + cantidad, PdfFontFactory.CreateFont(StandardFonts.HELVETICA), false);
+
             document.Add(table);
         }
 
 
         private void addtable_puestos(Document document, DataGridView tabla)
         {
-            addtable_puestos(document, tabla, tabla.Rows.Count-1);
+            Console.Write(tabla.Rows.Count);
+            if (tabla.Rows.Count>1)
+            {
+                addtable_puestos(document, tabla, tabla.Rows.Count - 1);
+            }
+            
         }
 
 
@@ -301,7 +342,9 @@ v. QUE SE ENCUENTRA AL CORRIENTE EN EL PAGO DE SUS OBLIGACIONES FISCALES.
  
 III.-  “LOS CONTRATANTES” DECLARAN  
  " + declaran +
-@" CLÁUSULAS 
+@" 
+
+CLÁUSULAS 
  
 PRIMERA: OBJETO 
 LAS PARTES, RECONOCEN QUE EL OBJETO DEL PRESENTE ES LA COMPRAVENTA DE: 
@@ -339,14 +382,26 @@ POR “EL VENDEDOR”
 "+vendedor_nombre, TextAlignment.CENTER);
 
 
-            document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
-            Createparagrah(document, @"COTIZACIÓN                                                                                                                       
-29/07/2019 
+document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
+
+Createparagrah(document, @"COTIZACIÓN                                                                                                                       
+"+fecha_actual+@"
 DIRIGIDO A : "+comprador_nombre+@" 	 
 
 
 ");
-            addtable(document,dataGridView1);
+addtable(document,dataGridView1);
+
+Createparagrah(document, @"
+EN ESPERA DE SU RESPUESTA
+");
+
+Createparagrah(document, @"
+
+ATENTAMENTE
+
+ENCARGADO DE LA EMPRESA
+", TextAlignment.CENTER);
         }
 
 
@@ -407,6 +462,11 @@ DIRIGIDO A : "+comprador_nombre+@"
         }
 
         private void textBox11_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
         {
 
         }
