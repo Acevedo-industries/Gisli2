@@ -104,7 +104,7 @@ namespace Gisli2
             vendedor_nombre = textBox1.Text;
             vendedor_tipo = textBox3.Text;
             vendedor_domicilio = textBox5.Text;
-            vendedor_rfc = textBox3.Text; 
+            vendedor_rfc = textBox4.Text; 
             vendedor_representantes = textBox10.Text;
 
             comprador_nombre = textBox7.Text;

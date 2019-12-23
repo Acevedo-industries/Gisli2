@@ -120,7 +120,7 @@
             this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.AliceBlue;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(313, 130);
+            this.button3.Location = new System.Drawing.Point(271, 130);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(142, 247);
             this.button3.TabIndex = 6;
@@ -139,13 +139,14 @@
             this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.AliceBlue;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(503, 130);
+            this.button4.Location = new System.Drawing.Point(464, 130);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(142, 247);
+            this.button4.Size = new System.Drawing.Size(187, 247);
             this.button4.TabIndex = 7;
             this.button4.Text = "Cotización";
             this.button4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 

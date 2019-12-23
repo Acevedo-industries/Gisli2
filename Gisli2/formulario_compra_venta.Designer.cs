@@ -74,6 +74,10 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBox21 = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBox20 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -85,10 +89,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label17 = new System.Windows.Forms.Label();
-            this.textBox20 = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.textBox21 = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -342,7 +342,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(809, 80);
+            this.label6.Location = new System.Drawing.Point(795, 80);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 20);
             this.label6.TabIndex = 16;
@@ -605,6 +605,48 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Objetos";
             // 
+            // textBox21
+            // 
+            this.textBox21.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.textBox21.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox21.Location = new System.Drawing.Point(244, 303);
+            this.textBox21.Name = "textBox21";
+            this.textBox21.Size = new System.Drawing.Size(455, 26);
+            this.textBox21.TabIndex = 35;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Black;
+            this.label18.Location = new System.Drawing.Point(729, 248);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(98, 20);
+            this.label18.TabIndex = 34;
+            this.label18.Text = "SUBTOTAL";
+            // 
+            // textBox20
+            // 
+            this.textBox20.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.textBox20.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox20.Location = new System.Drawing.Point(244, 271);
+            this.textBox20.Name = "textBox20";
+            this.textBox20.Size = new System.Drawing.Size(455, 26);
+            this.textBox20.TabIndex = 33;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.Black;
+            this.label17.Location = new System.Drawing.Point(729, 277);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(35, 20);
+            this.label17.TabIndex = 32;
+            this.label17.Text = "IVA";
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -725,48 +767,6 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Objetos";
             this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Black;
-            this.label17.Location = new System.Drawing.Point(729, 277);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(35, 20);
-            this.label17.TabIndex = 32;
-            this.label17.Text = "IVA";
-            // 
-            // textBox20
-            // 
-            this.textBox20.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox20.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox20.Location = new System.Drawing.Point(244, 271);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(455, 26);
-            this.textBox20.TabIndex = 33;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.Black;
-            this.label18.Location = new System.Drawing.Point(729, 248);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(98, 20);
-            this.label18.TabIndex = 34;
-            this.label18.Text = "SUBTOTAL";
-            // 
-            // textBox21
-            // 
-            this.textBox21.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox21.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox21.Location = new System.Drawing.Point(244, 303);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(455, 26);
-            this.textBox21.TabIndex = 35;
             // 
             // formulario_compra_venta
             // 

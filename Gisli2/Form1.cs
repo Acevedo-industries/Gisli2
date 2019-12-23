@@ -52,5 +52,11 @@ namespace Gisli2
             formulario_servicios ventana2 = new formulario_servicios();
             ventana2.Show();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            cotizacion ventana3 = new cotizacion();
+            ventana3.Show();
+        }
     }
 }

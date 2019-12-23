@@ -120,6 +120,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cotizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cotizacion.Designer.cs">
+      <DependentUpon>cotizacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="estado_archivo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="cotizacion.resx">
+      <DependentUpon>cotizacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="estado_archivo.resx">
       <DependentUpon>estado_archivo.cs</DependentUpon>
     </EmbeddedResource>
