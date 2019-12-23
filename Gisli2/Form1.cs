@@ -16,8 +16,10 @@ namespace Gisli2
         public Form1()
         {
             InitializeComponent();
-            label2.Text = Application.ProductVersion;
+
+
         }
+       
         public int xClick = 0, yClick = 0;
 
         //PASO 2: en el evento MouseMove del Form

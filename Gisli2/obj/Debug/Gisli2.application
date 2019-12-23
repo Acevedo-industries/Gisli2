@@ -9,14 +9,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Gisli2.exe.manifest" size="13603">
+    <dependentAssembly dependencyType="install" codebase="Gisli2.exe.manifest" size="13604">
       <assemblyIdentity name="Gisli2.exe" version="1.0.0.42" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/ujsu5UHb5fPZ+gWGS8jcj4Bb/7MDTHmGFnLPlGySd8=</dsig:DigestValue>
+        <dsig:DigestValue>+xYKk7n4KJcamQXsNExxzHd6OHo2Ijy3Tt0kBYv5Z0A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
