@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formulario_servicios));
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.cerrar = new System.Windows.Forms.Button();
@@ -737,7 +738,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(38, 536);
+            this.groupBox2.Location = new System.Drawing.Point(37, 522);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(992, 75);
             this.groupBox2.TabIndex = 31;
@@ -771,7 +772,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.Gray;
-            this.button3.Location = new System.Drawing.Point(128, 639);
+            this.button3.Location = new System.Drawing.Point(143, 622);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(381, 52);
             this.button3.TabIndex = 33;
@@ -787,7 +788,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.button1.Location = new System.Drawing.Point(524, 639);
+            this.button1.Location = new System.Drawing.Point(539, 622);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(378, 52);
             this.button1.TabIndex = 32;
@@ -811,7 +812,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SkyBlue;
-            this.ClientSize = new System.Drawing.Size(1066, 718);
+            this.ClientSize = new System.Drawing.Size(1066, 686);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
@@ -825,6 +826,7 @@
             this.Controls.Add(this.cerrar);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "formulario_servicios";
             this.Text = "formulario_servicios";
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.formulario_MouseMove);

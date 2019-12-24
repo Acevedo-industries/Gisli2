@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(cotizacion));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -82,7 +83,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(38, 141);
+            this.tabControl1.Location = new System.Drawing.Point(38, 132);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(991, 362);
@@ -431,7 +432,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(42, 531);
+            this.groupBox2.Location = new System.Drawing.Point(42, 517);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(992, 75);
             this.groupBox2.TabIndex = 36;
@@ -465,12 +466,13 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.Gray;
-            this.button3.Location = new System.Drawing.Point(122, 643);
+            this.button3.Location = new System.Drawing.Point(147, 611);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(381, 52);
             this.button3.TabIndex = 38;
             this.button3.Text = "Cancelar";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // button1
             // 
@@ -480,7 +482,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.button1.Location = new System.Drawing.Point(509, 643);
+            this.button1.Location = new System.Drawing.Point(534, 611);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(378, 52);
             this.button1.TabIndex = 37;
@@ -516,7 +518,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SkyBlue;
-            this.ClientSize = new System.Drawing.Size(1061, 725);
+            this.ClientSize = new System.Drawing.Size(1061, 683);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.button3);
@@ -528,6 +530,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "cotizacion";
             this.Text = "cotizacion";
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.formulario_MouseMove);

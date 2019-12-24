@@ -79,14 +79,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Gisli2.exe" size="136192">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Gisli2.exe" size="914944">
       <assemblyIdentity name="Gisli2" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>z2owws8Wjx1QCkxmqtTalA4PWPoxbVCxYtsCD5H6e+A=</dsig:DigestValue>
+        <dsig:DigestValue>zQzjblt4Vey5rLl1iptIZdb7sE2x+3GGNwcE/y9VZmU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

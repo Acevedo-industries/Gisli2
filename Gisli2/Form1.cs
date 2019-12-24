@@ -58,5 +58,41 @@ namespace Gisli2
             cotizacion ventana3 = new cotizacion();
             ventana3.Show();
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            formulario_compra_venta ventana2 = new formulario_compra_venta();
+            ventana2.Show();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            formulario_compra_venta ventana2 = new formulario_compra_venta();
+            ventana2.Show();
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            formulario_servicios ventana2 = new formulario_servicios();
+            ventana2.Show();
+        }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            cotizacion ventana3 = new cotizacion();
+            ventana3.Show();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            formulario_servicios ventana2 = new formulario_servicios();
+            ventana2.Show();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            cotizacion ventana3 = new cotizacion();
+            ventana3.Show();
+        }
     }
 }

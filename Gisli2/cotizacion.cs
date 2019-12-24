@@ -411,6 +411,11 @@ ATENTAMENTE
                 openFileDialog1.ShowDialog();
             }
         }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
 
